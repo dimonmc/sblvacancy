@@ -9,4 +9,21 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Sblvacancy::Application.config.secret_key_base = '7a381c0d42be302d79865c1256e6a45e9ccb67de2b14c654fd08c96e9adc5402e5d1ecd916b62381e0dcd6b5575fb01bdec6235267c7462a7fc6366f91d35d65'
+#Sblvacancy::Application.config.secret_key_base = '7a381c0d42be302d79865c1256e6a45e9ccb67de2b14c654fd08c96e9adc5402e5d1ecd916b62381e0dcd6b5575fb01bdec6235267c7462a7fc6366f91d35d65'
+
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+Sblvacancy::Application.config.secret_key_base = secure_token
