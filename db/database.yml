@@ -20,10 +20,11 @@ test: &test
 
 production:
   adapter: postgresql
-  database: bizlogic_production
+  database: d5skan7eb47aab
   pool: 5
   timeout: 5000
-  username: bizlogic
+  username: fmzzbmbkokycum
+  password: poRT_OxJ6Y-h-pJhzJG85SuNrz
 
 cucumber:
   <<: *test
